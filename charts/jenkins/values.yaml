@@ -564,6 +564,7 @@ controller:
   httpsKeyStore:
     jenkinsHttpsJksSecretName: ''
     enable: false
+    disableSecretMount: false
     httpPort: 8081
     path: "/var/jenkins_keystore"
     fileName: "keystore.jks"
