@@ -239,7 +239,7 @@ spec:
 {{- if .Values.persistence.mounts }}
 {{ toYaml .Values.persistence.mounts | indent 12 }}
 {{- end }}
-            {{- if .Values.controller.httpsKeyStore.enable }}
+            {{- if and .Values.controller.httpsKeyStore.enable (not .Values.controller.httpsKeyStore.disableSecretMount) }}
             {{- $httpsJKSDirPath :=  printf "%s" .Values.controller.httpsKeyStore.path }}
             - mountPath: {{ $httpsJKSDirPath }}
               name: jenkins-https-keystore
@@ -394,7 +394,7 @@ spec:
       - name: tmp-volume
         emptyDir: {}
 
-      {{- if .Values.controller.httpsKeyStore.enable }}
+      {{- if and .Values.controller.httpsKeyStore.enable (not .Values.controller.httpsKeyStore.disableSecretMount) }}
       - name: jenkins-https-keystore
         secret:
           secretName: {{ if .Values.controller.httpsKeyStore.jenkinsHttpsJksSecretName }} {{ .Values.controller.httpsKeyStore.jenkinsHttpsJksSecretName }} {{ else }} {{ template "jenkins.fullname" . }}-https-jks  {{ end }}
