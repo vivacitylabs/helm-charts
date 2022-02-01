@@ -70,6 +70,9 @@ spec:
       {{- if and (.Capabilities.APIVersions.Has "scheduling.k8s.io/v1beta1") (.Values.controller.priorityClassName) }}
       priorityClassName: {{ .Values.controller.priorityClassName }}
       {{- end }}
+      {{- if .Values.controller.shareProcessNamespace }}
+      shareProcessNamespace: true
+      {{- end }}
 {{- if .Values.controller.usePodSecurityContext }}
       securityContext:
   {{- if hasKey .Values.controller "podSecurityContextOverride" }}
@@ -192,10 +195,14 @@ spec:
               value: "{{ .Values.controller.agentListenerPort }}"
             {{- if .Values.controller.httpsKeyStore.enable }}
             - name: JENKINS_HTTPS_KEYSTORE_PASSWORD
+            {{- if not .Values.controller.httpsKeyStore.disableSecretMount }}
               valueFrom:
                 secretKeyRef:
                   name: {{ if .Values.controller.httpsKeyStore.jenkinsHttpsJksSecretName }} {{ .Values.controller.httpsKeyStore.jenkinsHttpsJksSecretName }} {{ else }} {{ template "jenkins.fullname" . }}-https-jks  {{ end }}
                   key: {{ "https-jks-password" | quote }}
+            {{- else }}
+              value: {{ .Values.controller.httpsKeyStore.password }}
+            {{- end }}
             {{- end }}
 
             {{- if .Values.controller.containerEnv }}
