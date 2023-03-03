@@ -222,6 +222,8 @@ spec:
                   key: {{ "https-jks-password" | quote }}
             {{- else }}
               value: {{ .Values.controller.httpsKeyStore.password }}
+
+            {{- end }}
             {{- end }}
             {{- end }}
 
@@ -428,6 +430,7 @@ spec:
         emptyDir: {}
       - name: tmp-volume
         emptyDir: {}
+
       {{- if and .Values.controller.httpsKeyStore.enable (not .Values.controller.httpsKeyStore.disableSecretMount) }}
       - name: jenkins-https-keystore
         secret:
