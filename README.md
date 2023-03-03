@@ -20,6 +20,11 @@ You can then run `helm search repo jenkins` to see the charts.
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
 Chart documentation is available in [jenkins directory](https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md).
 
+### Packaging a new jenkins version
+
+`helm package charts/jenkins -d docs/` - Create a new helm package 
+`helm repo index .` - Update the repo index 
+
 ## Contributing
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
@@ -29,3 +34,4 @@ We'd love to have you contribute! Please refer to our [contribution guidelines](
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
 [Apache 2.0 License](https://github.com/jenkinsci/helm-charts/blob/main/LICENSE).
+
