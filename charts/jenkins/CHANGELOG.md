@@ -12,6 +12,253 @@ Use the following links to reference issues, PRs, and commits prior to v2.6.0.
 The change log until v1.5.7 was auto-generated based on git commits.
 Those entries include a reference to the git commit to be able to get more details.
 
+## 4.3.4
+
+Update Jenkins image and appVersion to jenkins lts release version 2.375.3
+
+
+## 4.3.3
+
+Removed hardcoding of chart version in tests to make maintenance easier
+
+## 4.3.2
+
+Added `.Values.serviceAccount.extraLabels` on Service Account
+Added `.Values.serviceAccountAgent.extraLabels` on Agent's Service Account
+
+
+## 4.3.0
+
+Moved use of `.Values.containerEnv` within `jenkins` Container to top of `env` block to allow for subsequent Environment Variables to reference these additional ones.
+
+## 4.2.21
+
+Update Jenkins image and appVersion to jenkins lts release version 2.375.2
+
+
+## 4.2.20
+
+Fixed the `controller.prometheus.metricRelabelings` being unable to convert the value to the ServiceMonitor.
+Added `controller.prometheus.relabelings` to allow relabling before scrape.
+Added default values for `controller.prometheus.relabelings` and `controller.prometheus.metricRelabelings`.
+
+## 4.2.19
+
+CronJob api version upgraded to batch/v1
+
+## 4.2.18
+
+Added option to set secretEnvVars.
+
+## 4.2.17
+
+Update Jenkins image and appVersion to jenkins lts release version 2.375.1
+
+
+## 4.2.16
+
+Fixed chart notes not rendering Jenkins URL with prefix when `controller.jenkinsUriPrefix` is set.
+Fixed chart notes not rendering Jenkins URL with `https` when `controller.ingress.tls` or `controller.controller.httpsKeyStore.enable` is set.
+Fixed chart notes rendering wrong JCasC URL when not using `controller.ingress`.
+
+## 4.2.15
+
+Update Jenkins image and appVersion to jenkins lts release version 2.361.4
+
+## 4.2.14
+
+Added option to mount all keys from an existing k8s secret
+
+## 4.2.13
+
+Adding `tpl` to `controller.additionalExistingSecrets`
+
+## 4.2.12
+
+Update Jenkins image and appVersion to jenkins lts release version 2.361.3
+
+
+## 4.2.11
+
+Update default plugin versions
+
+| plugin                | old version           | new version            |
+|-----------------------|-----------------------|------------------------|
+| kubernetes            | 3706.vdfb_d599579f3   | 3734.v562b_b_a_627ea_c |
+| git                   | 4.11.5                | 4.13.0                 |
+| configuration-as-code | 1512.vb_79d418d5fc8   | 1569.vb_72405b_80249   |
+
+## 4.2.10
+Fix grammar and typos
+
+## 4.2.9
+Update Jenkins image and appVersion to jenkins lts release version 2.361.2
+
+## 4.2.8
+Modify the condition to trigger copying jenkins_config files when configAutoReload option is disabled during Jenkins initialization
+
+## 4.2.7
+Support for remote url for configuration
+
+## 4.2.6
+Add option to set hostnetwork for agents
+
+## 4.2.5
+Add an extra optional argument to extraPorts in order to specify targetPort
+
+## 4.2.4
+Remove k8s capibility requirements when setting priority class for controller
+
+## 4.2.3 Update plugin versions
+
+| plugin                | old version           | new version           |
+| --------------------- | --------------------- | --------------------- |
+| kubernetes            | 3600.v144b_cd192ca_a_ | 3706.vdfb_d599579f3   |
+| workflow-aggregator   | 581.v0c46fa_697ffd    | 590.v6a_d052e5a_a_b_5 |
+| configuration-as-code | 1429.v09b_044a_c93de  | 1512.vb_79d418d5fc8   |
+| git                   | 4.11.3                | 4.11.5                |
+
+Resolve version conflict between default install of plugins.
+
+## 4.2.2
+
+Support Google Managed Prometheus
+
+## 4.2.1
+
+Remove option to provide command and args of agent as YAML. This feature was never supported by the Jenkins Kubernetes
+plugin.
+
+## 4.2.0
+
+Add option to provide additional containers to agents
+
+## 4.1.18
+
+Update Jenkins image and appVersion to jenkins lts release version 2.361.1
+
+
+## 4.1.17
+
+Update Jenkins casc default settings to allow `security` configs to be provided
+
+
+## 4.1.16
+
+Update Jenkins image and appVersion to jenkins lts release version 2.346.3
+
+
+## 4.1.15
+
+`projectNamingStrategy` is configurable in default config.
+
+## 4.1.14
+
+If `installPlugins` is disabled, don't create unused plugins volume.
+
+## 4.1.13
+
+Update Jenkins image and appVersion to jenkins lts release version 2.346.2
+
+
+## 4.1.12
+
+If keystore is defined, it is now also made available in the initContainer.
+
+## 4.1.11
+
+JCasC ConfigMaps now generate their name from the `jenkins.casc.configName` helper
+
+## 4.1.10
+
+Update Jenkins image and appVersion to jenkins lts release version 2.346.1
+
+
+## 4.1.9
+
+Allow setting `imagePullSecret` for backup job via `backup.imagePullSecretName`
+
+## 4.1.8
+
+Fix path of projected secrets from `additionalExistingSecrets`.
+
+## 4.1.7
+
+Update README with explanation on the required environmental variable `AWS_REGION` in case of using an S3 bucket.
+
+## 4.1.6
+
+project adminSecret, additionalSecrets and additionalExistingSecrets instead of mount with subPath
+
+## 4.1.5
+
+Update README to fix `JAVA_OPTS` name.
+
+## 4.1.4
+Update plugins
+
+## 4.1.3
+Update jenkins-controller-statefulset projected volumes definition
+
+## 4.1.1
+Added 'controller.prometheus.metricRelabelings' to allow relabling and dropping unused prometheus metrics
+
+## 4.1.0
+
+Added `controller.sidecars.configAutoReload.envFrom`, `controller.initContainerEnvFrom`, `controller.containerEnvFrom`
+
+## 4.0.1
+
+No code changes - CI updated to run unit tests using Helm 3.8.2.
+
+## 4.0.0
+
+Removes automatic `remotingSecurity` setting when using a container tag older than `2.326` (introduced in [`3.11.7`](#3117)). If you're using a version older than `2.326`, you should explicitly set `.controller.legacyRemotingSecurityEnabled` to `true`.
+
+## 3.12.2
+
+Update Jenkins image and appVersion to jenkins lts release version 2.332.3
+
+## 3.12.1
+
+Make namespace configurable for agents and additional agents.
+
+## 3.12.0
+
+Added a flag for disabling the default Jenkins Agent configuration.
+
+## 3.11.10
+
+Update Jenkins image and appVersion to jenkins lts release version 2.332.2
+
+## 3.11.9 Bump configuration-as-code plugin version
+
+| plugin                | old version | new version |
+| --------------------- | ----------- | ----------- |
+| configuration-as-code | 1.51        | 1414.v878271fc496f        |
+
+## 3.11.8
+
+Make [externalTrafficPolicy](https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies) and `loadBalancerSourceRanges` fields customizable for Agent listener service via `controller.agentListenerExternalTrafficPolicy` and `controller.loadBalancerSourceRanges`.
+
+## 3.11.7
+
+Removed Configuration as Code `remotingSecurity` section for Jenkins 2.326 or newer. See [Documentation](https://www.jenkins.io/redirect/AdminWhitelistRule) to learn more.
+
+## 3.11.6
+
+Update Jenkins image and appVersion to jenkins lts release version 2.332.1
+
+
+## 3.11.5
+
+Change Backup Role name function call to match the RoleDef function call in the Backup RoleBinding
+
+## 3.11.4
+
+Update Jenkins image and appVersion to jenkins lts release version 2.319.3
+
+
 ## 3.11.3
 
 Update kiwigrid/k8s-sidecar:1.15.0

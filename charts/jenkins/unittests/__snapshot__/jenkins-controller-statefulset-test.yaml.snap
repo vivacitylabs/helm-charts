@@ -1,5 +1,5 @@
 render pod annotations:
   1: |
-    checksum/config: 825dc67e020a515fa22aba1f860dcdb52e36f4b9af997b66e66f2f427f25cbd0
+    checksum/config: d00c6603a9397bc202be5072a81644630af27fe47c7e542ea6b066073458af83
     fixed-annotation: some-fixed-annotation
     templated-annotations: my-release

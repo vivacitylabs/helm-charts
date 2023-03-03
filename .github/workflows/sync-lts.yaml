@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: next release version
         id: nextversion
-        uses: jenkins-x-plugins/jx-release-version@v2.5.1
+        uses: jenkins-x-plugins/jx-release-version@v2.6.1
         with:
           previous-version: from-file:charts/jenkins/Chart.yaml
 
@@ -30,14 +30,14 @@ jobs:
         run: |
           CURRENT_VERSION=$(cat charts/jenkins/Chart.yaml| grep appVersion | sed 's/appVersion: //')
           if [ "$CURRENT_VERSION" = "${{ steps.lts.outputs.jenkins_version }}" ]; then
-            echo "::set-output name=available::false"
+            echo "available=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=available::true"
-            echo "::set-output name=current-version::$CURRENT_VERSION"
+            echo "available=true" >> $GITHUB_OUTPUT
+            echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           fi
 
       - name: Update version in Chart.yaml
-        uses: mikefarah/yq@v4.18.1
+        uses: mikefarah/yq@v4.31.1
         if: ${{ steps.update.outputs.available == 'true' }}
         with:
           cmd: yq eval '.version = "${{ steps.nextversion.outputs.version }}"' -i charts/jenkins/Chart.yaml
@@ -66,7 +66,7 @@ jobs:
 
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         if: ${{ steps.update.outputs.available == 'true' }}
         with:
           token: ${{ steps.generate-token.outputs.token }}
