@@ -222,7 +222,6 @@ spec:
                   key: {{ "https-jks-password" | quote }}
             {{- else }}
               value: {{ .Values.controller.httpsKeyStore.password }}
-
             {{- end }}
             {{- end }}
 
