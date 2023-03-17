@@ -23,7 +23,7 @@ Chart documentation is available in [jenkins directory](https://github.com/jenki
 ### Packaging a new jenkins version
 
 `helm package charts/jenkins -d docs/` - Create a new helm package 
-`helm repo index .` - Update the repo index 
+`helm repo index docs` - Update the repo index 
 
 ## Contributing
 
