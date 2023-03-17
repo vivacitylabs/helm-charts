@@ -12,6 +12,10 @@ Use the following links to reference issues, PRs, and commits prior to v2.6.0.
 The change log until v1.5.7 was auto-generated based on git commits.
 Those entries include a reference to the git commit to be able to get more details.
 
+## 4.3.9-patch1
+
+Don't attempt to mount httpsKeyStore if it has been disabled
+
 ## 4.3.9
 
 Document `.Values.agent.directConnection` in README.
